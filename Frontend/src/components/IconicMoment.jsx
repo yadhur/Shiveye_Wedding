@@ -1,23 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 
 const IMAGES = [
-  "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=500&q=80",
-  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500&q=80",
-  "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80",
-  "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=500&q=80",
-  "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=500&q=80",
-
-  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500&q=80",
-  "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=500&q=80",
+  "/images/wedding/10.jpg",
+  "/images/pre-wedding/32.jpg",
+  "/images/wedding/23.jpg",
+  "/images/pre-wedding/22.jpg",
+  "/images/wedding/15.jpg",
+  "/images/pre-wedding/20.jpg",
+  "/images/wedding/19.jpg",
   null, // center text block
-  "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=500&q=80",
-  "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=500&q=80",
-
-  "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=500&q=80",
-  "https://images.unsplash.com/photo-1525258628472-3f29f960f6cb?w=500&q=80",
-  "https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500&q=80",
-  "https://images.unsplash.com/photo-1519741497674-611481863552?w=500&q=80",
-  "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=500&q=80",
+  "/images/pre-wedding/23.jpg",
+  "/images/wedding/17.jpg",
+  "/images/pre-wedding/10.jpg",
+  "/images/wedding/13.jpg",
+  "/images/pre-wedding/19.jpg",
+  "/images/wedding/11.jpg",
+  "/images/pre-wedding/14.jpg",
 ];
 
 export default function IconicMoments() {

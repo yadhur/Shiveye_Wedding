@@ -21,15 +21,15 @@ const fadeIn = (delay = 0) => ({
 /* ── Data ── */
 const LINKS = {
   Explore: [
-    { label: "About",        href: "/about" },
-    { label: "Testimonials", href: "/testimonials" },
-    { label: "Contact", href: "/#contactForm" },
+    { label: "About",        link: "/about" },
+    { label: "Testimonials", link: "/testimonials" },
+    { label: "Contact", link: "/#contactForm" },
   ],
   Services: [
-    { label: "Pre-Wedding",  },
-    { label: "Wedding",   },
-    { label: "Engagement", },
-    { label: "Documentary",},
+    { label: "Pre-Wedding", link:'/service-gallery/pre-wedding' },
+    { label: "Wedding",   link:'/service-gallery/wedding' },
+    { label: "Engagement", link:'/service-gallery/engagement' },
+    { label: "Documentary", link:'/service-gallery/documentary' },
   ],
 };
 
@@ -42,6 +42,7 @@ const CONTACT = [
   { icon: "ph:envelope-simple-light", text: "shivtejfilms.work@gmail.com" },
   { icon: "ph:phone-light",           text: "+91 8830201183" },
   { icon: "ph:map-pin-light",         text: "Amaravati, Maharashtra, India" },
+  { icon: "ph:map-pin-light",         text: "Pune, Maharashtra, India" },
 ];
 
 const LEGAL_LINKS = [
@@ -225,11 +226,11 @@ export default function Footer() {
                     <div className="w-4 h-px bg-[#c9a96e]/50" />
                     <span className="text-[10px] text-[#c9a96e] tracking-[0.3em] uppercase font-medium">{heading}</span>
                   </div>
-                  {links.map(({ label, href }) =>
-                    href ? (
+                  {links.map(({ label, href, link }) =>
+                    link ? (
                       <Link
                         key={label}
-                        to={href}
+                        to={link}
                         className="f-link text-white/40 text-xs tracking-wide"
                       >
                         {label}
@@ -239,7 +240,7 @@ export default function Footer() {
                         key={label}
                         className="f-link text-white/40 text-xs tracking-wide"
                       >
-                        {label}
+                        {label} hello
                       </span>
                     )
                   )}

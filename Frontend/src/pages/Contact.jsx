@@ -210,7 +210,7 @@ export default function ContactPage() {
                     <Icon icon={info.icon} className="text-lg" />
                   </div>
                   <div>
-                    <div className="mono text-[9px] tracking-[0.4em] text-gray-600 uppercase mb-1">{info.label}</div>
+                    <div className="mono text-[9px] tracking-[0.4em] text-[#c8a96e] uppercase mb-1">{info.label}</div>
                     <div className="mono text-sm text-gray-300 font-light group-hover:text-white transition-colors duration-300">
                       {info.value}
                     </div>
@@ -222,7 +222,7 @@ export default function ContactPage() {
 
           {/* ── SOCIAL MEDIA ── */}
           <motion.div variants={fadeUp}>
-            <div className="mono text-[9px] tracking-[0.45em] text-gray-600 uppercase mb-5 flex items-center gap-2">
+            <div className="mono text-[9px] tracking-[0.45em] text-[#c8a96e] uppercase mb-5 flex items-center gap-2">
               <Icon icon="mdi:share-variant-outline" className="text-xs" />
               Follow Along
             </div>
@@ -307,7 +307,7 @@ export default function ContactPage() {
                     {/* Name + Email */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>
-                        <label className="mono text-[9px] tracking-[0.4em] text-gray-600 uppercase flex items-center gap-1.5 mb-2">
+                        <label className="mono text-[9px] tracking-[0.4em] text-white uppercase flex items-center gap-1.5 mb-2">
                           <Icon icon="mdi:account-outline" className="text-xs" />
                           Your Name
                         </label>
@@ -324,7 +324,7 @@ export default function ContactPage() {
                         />
                       </div>
                       <div>
-                        <label className="mono text-[9px] tracking-[0.4em] text-gray-600 uppercase flex items-center gap-1.5 mb-2">
+                        <label className="mono text-[9px] tracking-[0.4em] text-white uppercase flex items-center gap-1.5 mb-2">
                           <Icon icon="mdi:email-outline" className="text-xs" />
                           Email Address
                         </label>
@@ -345,7 +345,7 @@ export default function ContactPage() {
 
                     {/* Project Type */}
                     <div>
-                      <label className="mono text-[9px] tracking-[0.4em] text-gray-600 uppercase flex items-center gap-1.5 mb-2">
+                      <label className="mono text-[9px] tracking-[0.4em] text-white uppercase flex items-center gap-1.5 mb-2">
                         <Icon icon="mdi:camera-outline" className="text-xs" />
                         Project Type
                       </label>
@@ -379,7 +379,7 @@ export default function ContactPage() {
 
                     {/* Message */}
                     <div>
-                      <label className="mono text-[9px] tracking-[0.4em] text-gray-600 uppercase flex items-center gap-1.5 mb-2">
+                      <label className="mono text-[9px] tracking-[0.4em] text-white uppercase flex items-center gap-1.5 mb-2">
                         <Icon icon="mdi:message-text-outline" className="text-xs" />
                         Tell Me About Your Vision
                       </label>
@@ -427,8 +427,8 @@ export default function ContactPage() {
                           )}
                         </span>
                       </motion.button>
-                      <p className="mono text-[10px] text-gray-600 font-light leading-relaxed flex items-start gap-1.5">
-                        <Icon icon="mdi:clock-outline" className="text-sm mt-0.5 flex-shrink-0 text-gray-700" />
+                      <p className="mono text-[10px] text-white font-light leading-relaxed flex items-start gap-1.5">
+                        <Icon icon="mdi:clock-outline" className="text-sm mt-0.5 flex-shrink-0 text-white" />
                         I reply within<br />24 hours.
                       </p>
                     </div>

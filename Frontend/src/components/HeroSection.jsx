@@ -156,13 +156,13 @@ export default function HeroSection() {
               {/* Headline */}
               <h1 className={`reveal delay-1 ${loaded ? "show" : ""} display-font leading-[0.9] mb-6`}>
                 <span className="block text-[clamp(3.5rem,8vw,7.5rem)] font-light text-white/90 italic">
-                  Capturing
+                Where  
                 </span>
                 <span className="block text-[clamp(3.8rem,9vw,8.5rem)] font-semibold accent-text">
-                  Moments
+                Love & Art
                 </span>
                 <span className="block text-[clamp(3.5rem,8vw,7.5rem)] font-light text-white/90 italic">
-                  Forever.
+                Intertwine.
                 </span>
               </h1>
 

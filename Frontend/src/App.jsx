@@ -43,6 +43,7 @@ const About = lazyWithInitialDelay(() => import("./pages/AboutUs"), 2500)
 const Testimonials = lazyWithInitialDelay(() => import("./pages/Testimonial"), 2500)
 const PrivacyPolicy = lazyWithInitialDelay(() => import("./pages/PrivacyPolicy"), 2500)
 const TermsAndConditions = lazyWithInitialDelay(() => import("./pages/TermsAndConditions"), 2500)
+const ServiceGallery = lazyWithInitialDelay(() => import("./pages/ServiceGallery"), 2500)
 function App() {
   return (
     <>
@@ -87,6 +88,14 @@ function App() {
             element={
               <Suspense fallback={<Loader duration={2500} />}>
                 <TermsAndConditions />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/service-gallery/:service"
+            element={
+              <Suspense fallback={<Loader duration={2500} />}>
+                <ServiceGallery />
               </Suspense>
             }
           />

@@ -128,7 +128,7 @@ export default function Navbar() {
                 transition={{ delay: 0.65, duration: 0.5 }}
                 whileTap={{ scale: 0.97 }}
                 className="book-btn ml-2 px-6 py-2.5 text-white text-[11px] tracking-[0.18em] uppercase"
-                onClick={() => navigate("/contact")}
+                onClick={() => navigate("/#contactForm")}
               >
                 <span className="flex items-center gap-2">
                   <Icon icon="ph:camera-light" className="w-3.5 h-3.5" />
