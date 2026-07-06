@@ -1,5 +1,6 @@
 import { useScroll, useTransform, motion } from "framer-motion";
 import React from "react";
+import { useNavigate} from "react-router-dom"
 ("use client");
 
 import { useRef } from "react";
@@ -53,6 +54,7 @@ function Service() {
     target: containerRef,
     offset: ["start start", "end end"],
   });
+  const navigate = useNavigate()
 
   // Move from first item centered to last item centered
   const totalDistance = (items.length - 1) * (ITEM_WIDTH + GAP);
@@ -119,7 +121,10 @@ function Service() {
               <div
                 key={item.id}
                 className="svc-card gallery-item relative cursor-pointer group"
-                onClick={() => navigate(item.link)}
+                onClick={() =>{
+                  console.log('hello');
+                  
+                  navigate(item.link)}}
               >
                 {/* Background image layer */}
                 <div
