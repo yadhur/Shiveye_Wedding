@@ -12,7 +12,7 @@ function Service() {
       sub: "Photo",
       tag: "Sacred Vows",
       desc: "Beautifully documenting the sacred union of two souls.",
-      image: "/images/wedding/28.jpg",
+      image: "/images/wedding/28.webp",
       link: "/service-gallery/wedding",
     },
     {
@@ -21,7 +21,7 @@ function Service() {
       sub: "Films",
       tag: "Joyful Celebration",
       desc: "Moments of laughter, dance, and unforgettable memories.",
-      image: "/images/wedding/13.jpg",
+      image: "/images/wedding/13.webp",
       link: "/service-gallery/engagement",
     },
     {
@@ -30,7 +30,7 @@ function Service() {
       sub: "Photo",
       tag: "Timeless Moments",
       desc: "Capturing the love, emotion, and beauty of your most cherished day.",
-      image: "/images/pre-wedding/37.jpg",
+      image: "/images/pre-wedding/37.webp",
       link: "/service-gallery/pre-wedding",
     },
 
@@ -40,7 +40,7 @@ function Service() {
       sub: "Films",
       tag: "Timeless Moments",
       desc: "Capturing the love, emotion, and beauty of your most cherished day.",
-      image: "/images/pre-wedding/36.jpg",
+      image: "/images/pre-wedding/36.webp",
       link: "/service-gallery/documentary",
     },
   ];

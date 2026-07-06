@@ -1,21 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 
 const IMAGES = [
-  "/images/wedding/10.jpg",
-  "/images/pre-wedding/32.jpg",
-  "/images/wedding/23.jpg",
-  "/images/pre-wedding/22.jpg",
-  "/images/wedding/15.jpg",
-  "/images/pre-wedding/20.jpg",
-  "/images/wedding/19.jpg",
+  "/images/wedding/10.webp",
+  "/images/pre-wedding/32.webp",
+  "/images/wedding/23.webp",
+  "/images/pre-wedding/22.webp",
+  "/images/wedding/15.webp",
+  "/images/pre-wedding/20.webp",
+  "/images/wedding/19.webp",
   null, // center text block
-  "/images/pre-wedding/23.jpg",
-  "/images/wedding/17.jpg",
-  "/images/pre-wedding/10.jpg",
-  "/images/wedding/13.jpg",
-  "/images/pre-wedding/19.jpg",
-  "/images/wedding/11.jpg",
-  "/images/pre-wedding/14.jpg",
+  "/images/pre-wedding/23.webp",
+  "/images/wedding/17.webp",
+  "/images/pre-wedding/10.webp",
+  "/images/wedding/13.webp",
+  "/images/pre-wedding/19.webp",
+  "/images/wedding/11.webp",
+  "/images/pre-wedding/14.webp",
 ];
 
 export default function IconicMoments() {
