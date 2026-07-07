@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import logo from "/images/logoLoading.png";
+import logo from "/images/logo.PNG";
 
 const TICKS = Array.from({ length: 11 }, (_, i) => i);
 
@@ -168,7 +168,7 @@ export default function Loader({ onComplete, duration }) {
             className="flex items-baseline overflow-hidden pb-1 leading-none tracking-[-0.03em] font-light"
             style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "clamp(88px,15vw,148px)" }}
           >
-                           <img src={logo} alt="logo" className="w-50 h-50" />
+                           <img src={logo} alt="logo" className="w-50 h-10" />
 
           </div>
 
