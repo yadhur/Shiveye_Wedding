@@ -39,11 +39,13 @@ function lazyWithInitialDelay(importFn, minDuration = 5000) {
 }
 
 const Home = lazyWithInitialDelay(() => import("./pages/Home"), 5000)
-const About = lazyWithInitialDelay(() => import("./pages/AboutUs"), 2500)
-const Testimonials = lazyWithInitialDelay(() => import("./pages/Testimonial"), 2500)
-const PrivacyPolicy = lazyWithInitialDelay(() => import("./pages/PrivacyPolicy"), 2500)
-const TermsAndConditions = lazyWithInitialDelay(() => import("./pages/TermsAndConditions"), 2500)
-const ServiceGallery = lazyWithInitialDelay(() => import("./pages/ServiceGallery"), 2500)
+const About = lazyWithInitialDelay(() => import("./pages/AboutUs"))
+const Testimonials = lazyWithInitialDelay(() => import("./pages/Testimonial"))
+const PrivacyPolicy = lazyWithInitialDelay(() => import("./pages/PrivacyPolicy"))
+const TermsAndConditions = lazyWithInitialDelay(() => import("./pages/TermsAndConditions"))
+const ServiceGallery = lazyWithInitialDelay(() => import("./pages/ServiceGallery"))
+const ServiceFilms = lazyWithInitialDelay(() => import("./pages/ServiceFilms"))
+
 function App() {
   return (
     <>
@@ -99,6 +101,15 @@ function App() {
               </Suspense>
             }
           />
+          <Route
+            path="/service-films/:service"
+            element={
+              <Suspense fallback={<Loader duration={2500} />}>
+                <ServiceFilms/>
+              </Suspense>
+            }
+          />
+          
         </Routes>
       </BrowserRouter>
       <FloatingContact />

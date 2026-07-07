@@ -28,8 +28,8 @@ const LINKS = {
   Services: [
     { label: "Pre-Wedding", link:'/service-gallery/pre-wedding' },
     { label: "Wedding",   link:'/service-gallery/wedding' },
-    { label: "Engagement", link:'/service-gallery/engagement' },
-    { label: "Documentary", link:'/service-gallery/documentary' },
+    { label: "Wedding Films", link:'/service-films/wedding' },
+    { label: "Pre-Wedding Flims", link:'/service-films/pre-wedding' },
   ],
 };
 

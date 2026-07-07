@@ -197,32 +197,43 @@ export default function ServiceGallery() {
         </section>
 
         {/* ── GALLERY ── */}
-        <section className="px-1 sm:px-0 lg:px-0 py-10 sm:py-14 bg-[#2f4034]">
-          <MasonryPhotoAlbum
-            photos={photos}
-            columns={(containerWidth) => {
-              if (containerWidth < 480) return 1;
-              if (containerWidth < 768) return 2;
-              if (containerWidth < 1100) return 3;
-              return 4;
-            }}
-            spacing={8}
-            render={{
-              wrapper: ({ photo, layout, children, ...rest }) => (
-                <div
-                  {...rest}
-                  className="sg-photo-wrap"
-                  onClick={() =>
-                    setLightboxIndex(photos.findIndex((p) => p.src === photo.src))
-                  }
-                >
-                  {children}
-                
-                </div>
-              ),
-            }}
-          />
-        </section>
+<section className="px-1 sm:px-0 lg:px-0 py-10 sm:py-14 bg-[#2f4034]">
+  <MasonryPhotoAlbum
+    photos={photos}
+    columns={(containerWidth) => {
+      if (containerWidth < 480) return 1;
+      if (containerWidth < 768) return 2;
+      if (containerWidth < 1100) return 3;
+      return 4;
+    }}
+    spacing={8}
+    render={{
+      // 1. Force the images to stay loaded up-front and prevent unmounting glitches
+      image: ({ src, alt, sizes, className, style }) => (
+        <img
+          src={src}
+          alt={alt}
+          sizes={sizes}
+          className={className}
+          style={style}
+          loading="eager" // 👈 Forces all images to load in one shot instantly
+        />
+      ),
+      // 2. Keep your existing wrapper click handler for the lightbox
+      wrapper: ({ photo, layout, children, ...rest }) => (
+        <div
+          {...rest}
+          className="sg-photo-wrap"
+          onClick={() =>
+            setLightboxIndex(photos.findIndex((p) => p.src === photo.src))
+          }
+        >
+          {children}
+        </div>
+      ),
+    }}
+  />
+</section>
 
         {/* ── LIGHTBOX ── */}
         <Lightbox

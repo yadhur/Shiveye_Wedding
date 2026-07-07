@@ -177,17 +177,8 @@ export default function HeroSection() {
 
               {/* CTAs */}
               <div className={`reveal delay-3 ${loaded ? "show" : ""} flex flex-wrap gap-4 mt-10`}>
-                <button className="cta-btn px-8 py-3.5 text-white text-sm tracking-[0.15em] uppercase rounded-none">
-                  <span>View Portfolio</span>
-                </button>
-                <button className="px-8 py-3.5 text-white/60 text-sm tracking-[0.15em] uppercase hover:text-white transition-colors">
-                  <span className="flex items-center gap-2">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z"/>
-                    </svg>
-                    Watch Reel
-                  </span>
-                </button>
+               
+              
               </div>
 
               {/* Stats */}
@@ -197,8 +188,8 @@ export default function HeroSection() {
                   { num: "3.4K", label: "Sessions Shot" },
                   { num: "98%", label: "Client Delight" },
                 ].map((s, i) => (
-                  <div key={i} className={`stat-item pl-6 pr-8 first:border-l-0 first:pl-0`}>
-                    <div className="display-font text-[clamp(1.6rem,3vw,2.2rem)] font-semibold accent-text leading-none">{s.num}</div>
+                  <div key={i} className={`${i!=0&&'stat-item'} pl-6 pr-8 first:border-l-0 first:pl-05 `}>
+                    <div className="display-font text-[clamp(1.6rem,3vw,2.2rem)] font-semibold accent-text leading-none ">{s.num}</div>
                     <div className="text-white/55 text-xs tracking-wider mt-1 uppercase">{s.label}</div>
                   </div>
                 ))}

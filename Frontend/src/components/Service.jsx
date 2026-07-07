@@ -1,11 +1,8 @@
-import { useScroll, useTransform, motion } from "framer-motion";
 import React from "react";
-import { useNavigate} from "react-router-dom"
-("use client");
-
-import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Service() {
+  const navigate = useNavigate();
   const items = [
     {
       id: 1,
@@ -23,7 +20,7 @@ function Service() {
       tag: "Joyful Celebration",
       desc: "Moments of laughter, dance, and unforgettable memories.",
       image: "/images/wedding/13.webp",
-      link: "/service-gallery/engagement",
+      link: "/service-films/wedding",
     },
     {
       id: 3,
@@ -42,23 +39,10 @@ function Service() {
       tag: "Timeless Moments",
       desc: "Capturing the love, emotion, and beauty of your most cherished day.",
       image: "/images/pre-wedding/36.webp",
-      link: "/service-gallery/documentary",
+      link: "/service-films/pre-wedding",
     },
   ];
 
-  const ITEM_WIDTH = 400;
-  const GAP = 30;
-
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-  const navigate = useNavigate()
-
-  // Move from first item centered to last item centered
-  const totalDistance = (items.length - 1) * (ITEM_WIDTH + GAP);
-  const x = useTransform(scrollYProgress, [0, 1], [0, -totalDistance]);
 
   return (
     <div
@@ -114,104 +98,103 @@ function Service() {
         {/* Thin separator */}
         <div className="mt-12 w-full h-px bg-gradient-to-r from-[#c8a96e]/40 via-[#c8a96e]/10 to-transparent" />
       </section>
-      <div ref={containerRef} className="scroll-container">
-        <div className="sticky-wrapper">
-          <motion.div className="gallery" style={{ x }}>
-            {items.map((item) => (
-              <div
-                key={item.id}
-                className="svc-card gallery-item relative cursor-pointer group"
-                onClick={() =>{
-                  console.log('hello');
-                  
-                  navigate(item.link)}}
-              >
-                {/* Background image layer */}
-                <div
-                  className="svc-card-img absolute inset-0"
-                  style={{ backgroundImage: `url(${item.image})`, backgroundSize: 'cover',backgroundPosition: 'center',backgroundRepeat: 'no-repeat' }}
-                />
+      <section className="px-8 sm:px-16 lg:px-24 pb-24">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+    {items.map((item) => (
+      <div
+        key={item.id}
+        className="svc-card gallery-item relative cursor-pointer group"
+        onClick={() => navigate(item.link)}
+      >
+        <div className="svc-card-img absolute inset-0 overflow-hidden">
+          <img
+            src={item.image}
+            alt={`${item.label} ${item.sub}`}
+            loading={"eager"}
+            fetchPriority={"high"}
+            decoding="sync"
+            width={400}
+            height={500}
+            draggable={false}
+            className="w-full h-full object-cover select-none"
+          />
+        </div>
 
-                {/* Warm gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#1a1814]/80" />
-                <div className="absolute inset-0 bg-[#c8a96e]/0 group-hover:bg-[#c8a96e]/10 transition-all duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#1a1814]/80" />
+        <div className="absolute inset-0 bg-[#c8a96e]/0 group-hover:bg-[#c8a96e]/10 transition-all duration-500" />
 
-                {/* Top-left number tag */}
-                <div className="absolute top-6 left-6 z-10 flex items-center gap-2.5">
-                  <span
-                    className="text-[#c8a96e] text-[9px] tracking-[0.5em] uppercase"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      fontWeight: 300,
-                    }}
-                  >
-                    0{item.id}
-                  </span>
-                  <span className="w-5 h-px bg-[#c8a96e]/60" />
-                  <span
-                    className="text-white/50 text-[9px] tracking-[0.35em] uppercase"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      fontWeight: 200,
-                    }}
-                  >
-                    {item.tag}
-                  </span>
-                </div>
+        <div className="absolute top-6 left-6 z-10 flex items-center gap-2.5">
+          <span
+            className="text-[#c8a96e] text-[9px] tracking-[0.5em] uppercase"
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 300,
+            }}
+          >
+            0{item.id}
+          </span>
 
-                {/* Top-right corner bracket */}
-                <div className="absolute top-5 right-5 z-10 w-5 h-5 opacity-40 group-hover:opacity-80 transition-opacity duration-300">
-                  <span className="absolute top-0 right-0 w-full h-px bg-[#c8a96e]" />
-                  <span className="absolute top-0 right-0 w-px h-full bg-[#c8a96e]" />
-                </div>
+          <span className="w-5 h-px bg-[#c8a96e]/60" />
 
-                {/* Bottom content */}
-                <div className="item-content">
-                  {/* Gold micro-line */}
-                  <div className="w-8 h-px bg-[#c8a96e] mb-4 group-hover:w-14 transition-all duration-500" />
+          <span
+            className="text-white/50 text-[9px] tracking-[0.35em] uppercase"
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 200,
+            }}
+          >
+            {item.tag}
+          </span>
+        </div>
 
-                  <h2
-                    className="text-white font-light leading-none"
-                    style={{
-                      fontFamily: "'Cormorant Garamond', serif",
-                      fontSize: "clamp(32px, 3.5vw, 46px)",
-                      letterSpacing: "-0.02em",
-                      fontWeight: 300,
-                    }}
-                  >
-                    {item.label}
-                    <span className="italic text-white/60 ml-2">
-                      {item.sub}
-                    </span>
-                  </h2>
+        <div className="absolute top-5 right-5 z-10 w-5 h-5 opacity-40 group-hover:opacity-80 transition-opacity duration-300">
+          <span className="absolute top-0 right-0 w-full h-px bg-[#c8a96e]" />
+          <span className="absolute top-0 right-0 w-px h-full bg-[#c8a96e]" />
+        </div>
 
-                  <p
-                    className="text-white/50 text-[11px] leading-relaxed mt-3 max-w-[280px] translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      fontWeight: 300,
-                    }}
-                  >
-                    {item.desc}
-                  </p>
+        <div className="item-content">
+          <div className="w-8 h-px bg-[#c8a96e] mb-4 group-hover:w-14 transition-all duration-500" />
 
-                  {/* CTA */}
-                  <div
-                    className="flex items-center gap-2 mt-4 text-[#c8a96e] text-[9px] tracking-[0.4em] uppercase opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 delay-75"
-                    style={{
-                      fontFamily: "'Montserrat', sans-serif",
-                      fontWeight: 300,
-                    }}
-                  >
-                    <span>Explore</span>
-                    <span className="inline-block w-5 h-px bg-[#c8a96e]" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </motion.div>
+          <h2
+            className="text-white font-light leading-none"
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: "clamp(32px, 3.5vw, 46px)",
+              letterSpacing: "-0.02em",
+              fontWeight: 300,
+            }}
+          >
+            {item.label}
+            <span className="italic text-white/60 ml-2">
+              {item.sub}
+            </span>
+          </h2>
+
+          <p
+            className="text-white/50 text-[11px] leading-relaxed mt-3 max-w-[280px] translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500"
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 300,
+            }}
+          >
+            {item.desc}
+          </p>
+
+          <div
+            className="flex items-center gap-2 mt-4 text-[#c8a96e] text-[9px] tracking-[0.4em] uppercase opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-500 delay-75"
+            style={{
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 300,
+            }}
+          >
+            <span>Explore</span>
+            <span className="inline-block w-5 h-px bg-[#c8a96e]" />
+          </div>
         </div>
       </div>
+    ))}
+  </div>
+</section>
 
       <StyleSheet />
     </div>
@@ -225,112 +208,40 @@ function Service() {
 function StyleSheet() {
   return (
     <style>{`
-         
+      .gallery-item {
+        width: 100%;
+        height: 500px;
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        content-visibility: auto;
+        contain: layout paint style;
+      }
 
-        
+      .svc-card-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        will-change: transform;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+      }
 
-            .scroll-container {
-                height: 300vh;
-                position: relative;
-            }
+      .item-content {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        z-index: 1;
+      }
 
-            .sticky-wrapper {
-                position: sticky;
-                top: 0;
-                height: 100vh;
-                width: 100%;
-                margin: 0 auto;
-                display: flex;
-                align-items: center;
-                justify-content: flex-start;
-                overflow: visible;
-            }
-
-            .gallery {
-                display: flex;
-                gap: 30px;
-                will-change: transform;
-            }
-
-            .gallery-item {
-                flex-shrink: 0;
-                width: 400px;
-                height: 500px;
-                border-radius: 12px;
-                position: relative;
-                overflow: hidden;
-                background-image: var(--item-image);
-                background-size: cover;
-                background-position: center;
-            }
-
-            .gallery-item::before {
-                content: "";
-                position: absolute;
-                inset: 0;
-                background: linear-gradient(
-                    to bottom,
-                    transparent 60%,
-                    var(--item-color)
-                );
-                mix-blend-mode: multiply;
-            }
-
-            .item-content {
-                position: absolute;
-                bottom: 30px;
-                left: 30px;
-                z-index: 1;
-            }
-
-            .item-number {
-                font-size: 14px;
-                color: var(--item-color);
-                font-family: "Azeret Mono", monospace;
-                display: block;
-                margin-bottom: 8px;
-            }
-
-            .gallery-item h2 {
-                font-size: 28px;
-                font-weight: 600;
-                color: #f5f5f5;
-                margin: 0;
-            }
-
-    
-
-            @media (max-width: 600px) {
-                .sticky-wrapper {
-                    width: 280px;
-                }
-
-                .gallery {
-                    gap: 15px;
-                }
-
-                .gallery-item {
-                    width: 280px;
-                    height: 350px;
-                }
-            }
-
-            @media (prefers-reduced-motion: reduce) {
-                .gallery {
-                    transform: none !important;
-                }
-                .scroll-container {
-                    height: auto;
-                }
-                .sticky-wrapper {
-                    position: relative;
-                    height: auto;
-                    width: 100%;
-                    overflow-x: auto;
-                    padding: 50px 0;
-                }
-            }
-        `}</style>
+      @media (max-width: 640px) {
+        .gallery-item {
+          width: 100%;
+          max-width: 320px;
+          height: 420px;
+        }
+      }
+    `}</style>
   );
 }
 
