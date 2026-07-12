@@ -38,14 +38,30 @@ const contactInfo = [
     value: "Amravati, Maharashtra, India.",
     icon: "mdi:map-marker-outline",
   },
+  {
+    label: "Studio",
+    value: "Pune, Maharashtra, India.",
+    icon: "mdi:map-marker-outline",
+  },
 ];
 
-const obj ={
-  name:'',
-  type:'',
-  email:'',
-  message:''
-}
+const WHATSAPP_NUMBER = "918830201183";
+
+const TYPE_LABELS = {
+  wedding: "Wedding Photography",
+  "pre-wedding": "Pre-Wedding",
+  "baby-shower": "Baby Shower",
+  engagement: "Engagement",
+  other: "Other",
+};
+
+const obj = {
+  name: "",
+  type: "",
+  email: "",
+  phone: "",
+  message: "",
+};
 
 export default function ContactPage() {
   const [formState, setFormState] = useState(obj);
@@ -76,6 +92,31 @@ export default function ContactPage() {
     } finally {
       setSending(false);
     }    
+  };
+
+  const handleWhatsAppSubmit = () => {
+    const { name, email, phone, type, message } = formState;
+    if (!name || !email || !phone || !type || !message) {
+      toast?.error("Please fill in all fields before sending on WhatsApp.");
+      return;
+    }
+
+    const typeLabel = TYPE_LABELS[type] || type;
+    const text = [
+      "Hello Shiveye Wedding,",
+      "",
+      "I'd like to enquire about your services.",
+      "",
+      `*Name:* ${name}`,
+      `*Email:* ${email}`,
+      `*Phone:* ${phone}`,
+      `*Project:* ${typeLabel}`,
+      "",
+      "*Message:*",
+      message,
+    ].join("\n");
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
   };
 
   const stagger = {
@@ -141,6 +182,18 @@ export default function ContactPage() {
         .send-btn:hover::after { transform: translateX(0); }
         .send-btn span { position: relative; z-index: 1; transition: color 0.4s ease; }
         .send-btn:hover span { color: #080807; }
+
+        .whatsapp-btn { position: relative; overflow: hidden; }
+        .whatsapp-btn::after {
+          content: '';
+          position: absolute; inset: 0;
+          background: #25D366;
+          transform: translateX(-101%);
+          transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .whatsapp-btn:hover::after { transform: translateX(0); }
+        .whatsapp-btn span { position: relative; z-index: 1; transition: color 0.4s ease; }
+        .whatsapp-btn:hover span { color: white; }
       `}</style>
 
       <div className="grain-overlay" />
@@ -343,6 +396,26 @@ export default function ContactPage() {
                       </div>
                     </div>
 
+                    {/* Phone */}
+                    <div>
+                      <label className="mono text-[9px] tracking-[0.4em] text-white uppercase flex items-center gap-1.5 mb-2">
+                        <Icon icon="mdi:phone-outline" className="text-xs" />
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={formState.phone}
+                        onChange={handleChange}
+                        onFocus={() => setFocused("phone")}
+                        onBlur={() => setFocused(null)}
+                        placeholder="+91 98765 43210"
+                        required
+                        className="input-field"
+                        style={{ borderBottomColor: focused === "phone" ? "#c8a96e" : undefined }}
+                      />
+                    </div>
+
                     {/* Project Type */}
                     <div>
                       <label className="mono text-[9px] tracking-[0.4em] text-white uppercase flex items-center gap-1.5 mb-2">
@@ -400,33 +473,46 @@ export default function ContactPage() {
                     </div>
 
                     {/* Submit */}
-                    <div className="flex flex-wrap items-center gap-6 pt-2">
-                      <motion.button
-                        type="submit"
-                        disabled={sending}
-                        whileTap={{ scale: 0.97 }}
-                        className="send-btn mono text-xs tracking-[0.3em] uppercase bg-[#c8a96e] text-black px-10 py-4 font-medium disabled:opacity-60 disabled:cursor-not-allowed"
-                      >
-                        <span className="flex items-center gap-2">
-                          {sending ? (
-                            <>
-                              <motion.span
-                                animate={{ rotate: 360 }}
-                                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                                className="inline-flex"
-                              >
-                                <Icon icon="mdi:loading" className="text-base" />
-                              </motion.span>
-                              Sending...
-                            </>
-                          ) : (
-                            <>
-                              Send Message
-                              <Icon icon="mdi:send-outline" className="text-base" />
-                            </>
-                          )}
-                        </span>
-                      </motion.button>
+                    <div className="flex flex-col gap-6 pt-2">
+                      <div className="flex flex-wrap items-center gap-4">
+                        <motion.button
+                          type="submit"
+                          disabled={sending}
+                          whileTap={{ scale: 0.97 }}
+                          className="send-btn mono text-xs tracking-[0.3em] uppercase bg-[#c8a96e] text-black px-10 py-4 font-medium disabled:opacity-60 disabled:cursor-not-allowed"
+                        >
+                          <span className="flex items-center gap-2">
+                            {sending ? (
+                              <>
+                                <motion.span
+                                  animate={{ rotate: 360 }}
+                                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                                  className="inline-flex"
+                                >
+                                  <Icon icon="mdi:loading" className="text-base" />
+                                </motion.span>
+                                Sending...
+                              </>
+                            ) : (
+                              <>
+                                Send Message
+                                <Icon icon="mdi:send-outline" className="text-base" />
+                              </>
+                            )}
+                          </span>
+                        </motion.button>
+                        <motion.button
+                          type="button"
+                          onClick={handleWhatsAppSubmit}
+                          whileTap={{ scale: 0.97 }}
+                          className="whatsapp-btn mono text-xs tracking-[0.3em] uppercase border border-[#25D366] text-[#25D366] px-10 py-4 font-medium"
+                        >
+                          <span className="flex items-center gap-2">
+                            Send on WhatsApp
+                            <Icon icon="mdi:whatsapp" className="text-base" />
+                          </span>
+                        </motion.button>
+                      </div>
                       <p className="mono text-[10px] text-white font-light leading-relaxed flex items-start gap-1.5">
                         <Icon icon="mdi:clock-outline" className="text-sm mt-0.5 flex-shrink-0 text-white" />
                         I reply within<br />24 hours.
@@ -461,7 +547,7 @@ export default function ContactPage() {
                   <motion.button
                     onClick={() => {
                       setSubmitted(false);
-                      setFormState({ name: "", email: "", subject: "", message: "" });
+                      setFormState({ name: "", email: "", phone: "", type: "", message: "" });
                     }}
                     whileHover={{ x: 4 }}
                     className="mono text-xs tracking-[0.3em] uppercase text-[#c8a96e] mt-10 flex items-center gap-2"

@@ -1,12 +1,22 @@
 import { useState, useEffect } from "react";
 
+/** Runs the entrance animation only once per browser session. */
+let heroRevealDone = false;
+
 export default function HeroSection() {
-  const [loaded, setLoaded] = useState(false);
+  const [shouldAnimate] = useState(!heroRevealDone);
+  const [revealed, setRevealed] = useState(heroRevealDone);
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 100);
+    if (!shouldAnimate) return;
+
+    const t = setTimeout(() => {
+      setRevealed(true);
+      heroRevealDone = true;
+    }, 100);
+
     return () => clearTimeout(t);
-  }, []);
+  }, [shouldAnimate]);
 
   return (
     <>
@@ -15,6 +25,8 @@ export default function HeroSection() {
 
         .hero-root {
           font-family: 'Montserrat', sans-serif;
+          isolation: isolate;
+          transform: translateZ(0);
         }
         .display-font {
           font-family: 'Cormorant Garamond', serif;
@@ -31,24 +43,14 @@ export default function HeroSection() {
           z-index: 1;
         }
 
-        /* Reveal animations */
-        .reveal {
-          opacity: 0;
-          transform: translateY(32px);
-          transition: opacity 0.9s cubic-bezier(0.4,0,0.2,1), transform 0.9s cubic-bezier(0.4,0,0.2,1);
-        }
-        .reveal.show { opacity: 1; transform: translateY(0); }
+        /* Reveal animations — only on first visit */
+      
         .reveal-right {
-          opacity: 0;
-          transform: translateX(40px);
-          transition: opacity 1s cubic-bezier(0.4,0,0.2,1), transform 1s cubic-bezier(0.4,0,0.2,1);
+          opacity: 1;
+          transform: translateX(0);
         }
-        .reveal-right.show { opacity: 1; transform: translateX(0); }
-
-        .delay-1 { transition-delay: 0.15s; }
-        .delay-2 { transition-delay: 0.3s; }
-        .delay-3 { transition-delay: 0.5s; }
-        .delay-4 { transition-delay: 0.65s; }
+       
+      
         .delay-cam { transition-delay: 0.4s; }
 
         /* Highlight word — gold shimmer, warmer against the green */
@@ -61,12 +63,15 @@ export default function HeroSection() {
 
         /* Decorative line */
         .divider-line {
-          width: 0;
+          width: 120px;
           height: 1px;
           background: linear-gradient(90deg, #c9a96e, transparent);
+        }
+        .hero-animate .divider-line {
+          width: 0;
           transition: width 1.2s cubic-bezier(0.4,0,0.2,1) 0.7s;
         }
-        .divider-line.show { width: 120px; }
+        .hero-animate .divider-line.show { width: 120px; }
 
         /* Camera SVG glow */
         .cam-glow {
@@ -126,7 +131,7 @@ export default function HeroSection() {
         }
       `}</style>
 
-      <section className="hero-root grain relative min-h-screen bg-[#2f4034] flex items-center overflow-hidden">
+      <section className={`hero-root grain relative min-h-screen bg-[#2f4034] flex items-center overflow-hidden${shouldAnimate ? " hero-animate" : ""}`}>
 
         {/* ── Background radial glow ── */}
         <div className="absolute inset-0 pointer-events-none">
@@ -146,7 +151,7 @@ export default function HeroSection() {
             <div className="flex-1 text-white">
 
               {/* Eyebrow */}
-              <div className={`reveal ${loaded ? "show" : ""} flex items-center gap-3 mb-8`}>
+              <div className="flex items-center gap-3 mb-8">
                 <div className="w-6 h-px bg-[#c9a96e]" />
                 <span className="text-[#c9a96e] text-xs tracking-[0.3em] uppercase font-medium">
                   Wedding Storytelling
@@ -154,7 +159,7 @@ export default function HeroSection() {
               </div>
 
               {/* Headline */}
-              <h1 className={`reveal delay-1 ${loaded ? "show" : ""} display-font leading-[0.9] mb-6`}>
+              <h1 className="display-font leading-[0.9] mb-6">
                 <span className="block text-[clamp(3.5rem,8vw,7.5rem)] font-light text-white/90 italic">
                 Where  
                 </span>
@@ -167,22 +172,22 @@ export default function HeroSection() {
               </h1>
 
               {/* Divider */}
-              <div className={`divider-line ${loaded ? "show" : ""} mb-8`} />
+              <div className="divider-line show mb-8" />
 
               {/* Subtext */}
-              <p className={`reveal delay-2 ${loaded ? "show" : ""} text-white/60 text-sm sm:text-base leading-relaxed max-w-md font-light tracking-wide`}>
+              <p className="text-white/60 text-sm sm:text-base leading-relaxed max-w-md font-light tracking-wide">
                 Where light meets emotion — crafting timeless images that breathe
                 life into your most precious memories.
               </p>
 
               {/* CTAs */}
-              <div className={`reveal delay-3 ${loaded ? "show" : ""} flex flex-wrap gap-4 mt-10`}>
+              <div className="flex flex-wrap gap-4 mt-10">
                
               
               </div>
 
               {/* Stats */}
-              <div className={`reveal delay-4 ${loaded ? "show" : ""} flex gap-0 mt-14`}>
+              <div className="flex gap-0 mt-14">
                 {[
                   { num: "12+", label: "Years Experience" },
                   { num: "3.4K", label: "Sessions Shot" },
@@ -197,7 +202,7 @@ export default function HeroSection() {
             </div>
 
             {/* ── RIGHT — Camera Illustration ── */}
-            <div className={`reveal-right delay-cam ${loaded ? "show" : ""} flex-1 flex items-center justify-center relative`}>
+            <div className={`reveal-right delay-cam ${revealed ? "show" : ""} flex-1 flex items-center justify-center relative`}>
 
               {/* Outer decorative ring */}
               <div className="absolute w-[340px] h-[340px] sm:w-[420px] sm:h-[420px] rounded-full border border-white/10" />
@@ -346,7 +351,7 @@ export default function HeroSection() {
                   <div className="w-2 h-2 rounded-full bg-[#c9a96e] animate-pulse" />
                   <div>
                     <p className="text-white/85 text-xs tracking-widest uppercase">Available</p>
-                    <p className="text-[#c9a96e] text-xs tracking-wider mt-0.5">For Booking 2026</p>
+                    <p className="text-[#c9a96e] text-xs tracking-wider mt-0.5">For Booking 2026 - 2027</p>
                   </div>
                 </div>
               </div>

@@ -31,13 +31,13 @@ app.get('/', (req, res) => {
 
  // routes/contact.js — POST /api/contact
 router.post("/api/contact", async (req, res) => {
-    const { name, email, type, message } = req.body;
+    const { name, email, phone, type, message } = req.body;
   
     // Basic validation
-    if (!name || !email || !message || !type) {
+    if (!name || !email || !phone || !message || !type) {
       return res
         .status(400)
-        .json({ error: "Name, email, type and message are required." });
+        .json({ error: "Name, email, phone, type and message are required." });
     }
   
     // Friendly label for the project type stored as a slug (e.g. "pre-wedding")
@@ -55,8 +55,9 @@ router.post("/api/contact", async (req, res) => {
       timeStyle: "short",
       timeZone: "Asia/Kolkata",
     });
-    function buildContactEmailHtml({ name, email, typeLabel, message, submittedAt }) {
+    function buildContactEmailHtml({ name, email, phone, typeLabel, message, submittedAt }) {
         const safeMessage = message.replace(/\n/g, "<br/>");
+        const phoneHref = phone.replace(/\s/g, "");
       
         return `
       <!DOCTYPE html>
@@ -122,6 +123,14 @@ router.post("/api/contact", async (req, res) => {
                       </tr>
                       <tr>
                         <td style="padding-bottom:18px; border-top:1px solid #f0eee8; padding-top:18px;" width="120" valign="top">
+                          <p style="margin:0; color:#9c8f7e; font-family: Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase;">Phone</p>
+                        </td>
+                        <td style="padding-bottom:18px; border-top:1px solid #f0eee8; padding-top:18px;" valign="top">
+                          <a href="tel:${phoneHref}" style="color:#2f4034; font-family: Georgia, serif; font-size:16px; text-decoration:none; border-bottom:1px solid #c8a96e;">${phone}</a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding-bottom:18px; border-top:1px solid #f0eee8; padding-top:18px;" width="120" valign="top">
                           <p style="margin:0; color:#9c8f7e; font-family: Arial, Helvetica, sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase;">Project</p>
                         </td>
                         <td style="padding-bottom:18px; border-top:1px solid #f0eee8; padding-top:18px;" valign="top">
@@ -178,7 +187,7 @@ router.post("/api/contact", async (req, res) => {
         replyTo: email,
         subject: `New Enquiry — ${typeLabel} — ${name}`,
         text:'New Enquiry',
-        html: buildContactEmailHtml({ name, email, typeLabel, message, submittedAt }),
+        html: buildContactEmailHtml({ name, email, phone, typeLabel, message, submittedAt }),
       });
   
       res.status(200).json({ success: true });

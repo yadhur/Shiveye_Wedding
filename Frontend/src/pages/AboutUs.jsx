@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useInView } from "framer-motion";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import logo from "/images/logo.PNG";
 
 const portfolioImages = [
   {
@@ -174,14 +175,7 @@ function AboutUs() {
             Professional Photographer
           </motion.div>
 
-          <motion.h1
-            initial={{ x: -80, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="text-6xl md:text-8xl lg:text-9xl font-light leading-none tracking-tight"
-          >
-            Shiveye
-          </motion.h1>
+          <img src={logo} alt="logo" className="w-100 h-50" />
 
           <motion.p
             initial={{ x: -80, opacity: 0 }}
@@ -310,123 +304,7 @@ function AboutUs() {
             </motion.div>
           ))}
         </motion.div> */}
-      </section>
-
-      {/* PORTFOLIO SECTION */}
-      <section id="portfolio" className="py-24 overflow-hidden">
-        <div className="px-8 md:px-20 lg:px-32 mb-16 max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mono text-[#c8a96e] text-[10px] tracking-[0.5em] uppercase mb-4"
-            >
-              Selected Work
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-5xl md:text-6xl font-light leading-tight"
-            >
-              My Portfolio
-              <br />
-              <span className="italic text-gray-400">Collection</span>
-            </motion.h2>
-          </div>
-          <motion.a
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            href="#"
-            className="mono text-xs tracking-[0.3em] uppercase border border-gray-700 text-gray-400 px-8 py-3 hover:border-[#c8a96e] hover:text-[#c8a96e] transition-all duration-300 self-start md:self-auto"
-          >
-            View All Work
-          </motion.a>
-        </div>
-
-        {/* Auto-sliding strip */}
-        <div
-          className="relative overflow-hidden py-4"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          {/* Edge fade */}
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-
-          <motion.div
-            className="flex gap-5"
-            style={{ x: sliderX, width: "max-content" }}
-            transition={{ type: "tween" }}
-          >
-            {doubled.map((img, i) => (
-              <motion.div
-                key={`${img.id}-${i}`}
-                className="relative flex-shrink-0 w-[300px] h-[420px] overflow-hidden cursor-pointer group"
-                whileHover={{ scale: 1.03 }}
-                transition={{ duration: 0.4 }}
-              >
-                <img
-                  src={img.src}
-                  alt={img.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  style={{ filter: "brightness(0.8) grayscale(20%)" }}
-                />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-500 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100">
-                  <div className="mono text-[#c8a96e] text-[10px] tracking-[0.4em] uppercase mb-2">
-                    {img.category}
-                  </div>
-                  <div className="text-2xl font-light">{img.title}</div>
-                  <div className="w-8 h-px bg-[#c8a96e] mt-3" />
-                </div>
-                {/* Category tag */}
-                <div className="absolute top-4 left-4 mono text-[9px] tracking-[0.3em] text-gray-300 uppercase bg-black/40 backdrop-blur-sm px-3 py-1">
-                  {img.category}
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Second strip - reverse */}
-        <div
-          className="relative overflow-hidden py-4 mt-5"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none" />
-
-          <motion.div
-            className="flex gap-5"
-            style={{ x: -sliderX, width: "max-content" }}
-            transition={{ type: "tween" }}
-          >
-            {[...doubled].reverse().map((img, i) => (
-              <motion.div
-                key={`rev-${img.id}-${i}`}
-                className="relative flex-shrink-0 w-[220px] h-[280px] overflow-hidden cursor-pointer group"
-                whileHover={{ scale: 1.04 }}
-                transition={{ duration: 0.4 }}
-              >
-                <img
-                  src={img.src}
-                  alt={img.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  style={{ filter: "brightness(0.7) grayscale(40%)" }}
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500 flex items-end p-4 opacity-0 group-hover:opacity-100">
-                  <div className="text-lg font-light">{img.title}</div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      </section>   
 
       {/* CTA */}
       <section className="py-32 px-8 text-center relative overflow-hidden">
