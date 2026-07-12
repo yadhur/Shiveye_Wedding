@@ -10,7 +10,7 @@ function Service() {
       sub: "Photo",
       tag: "Sacred Vows",
       desc: "Beautifully documenting the sacred union of two souls.",
-      image: "/images/wedding/28.webp",
+      image: "/wedding/28.webp",
       link: "/service-gallery/wedding",
     },
     {
@@ -19,7 +19,7 @@ function Service() {
       sub: "Films",
       tag: "Joyful Celebration",
       desc: "Moments of laughter, dance, and unforgettable memories.",
-      image: "/images/wedding/13.webp",
+      image: "/wedding/13.webp",
       link: "/service-films/wedding",
     },
     {
@@ -28,7 +28,7 @@ function Service() {
       sub: "Photo",
       tag: "Timeless Moments",
       desc: "Capturing the love, emotion, and beauty of your most cherished day.",
-      image: "/images/pre-wedding/37.webp",
+      image: "/pre-wedding/37.webp",
       link: "/service-gallery/pre-wedding",
     },
 
@@ -38,7 +38,7 @@ function Service() {
       sub: "Films",
       tag: "Timeless Moments",
       desc: "Capturing the love, emotion, and beauty of your most cherished day.",
-      image: "/images/pre-wedding/36.webp",
+      image: "/pre-wedding/36.webp",
       link: "/service-films/pre-wedding",
     },
   ];
@@ -108,7 +108,7 @@ function Service() {
       >
         <div className="svc-card-img absolute inset-0 overflow-hidden">
           <img
-            src={item.image}
+            src={import.meta.env.VITE_S3_BASE_URL+item.image}
             alt={`${item.label} ${item.sub}`}
             loading={"eager"}
             fetchPriority={"high"}

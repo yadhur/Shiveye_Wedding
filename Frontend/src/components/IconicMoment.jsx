@@ -1,19 +1,19 @@
 const IMAGES = [
-  "/images/wedding/10.webp",
-  "/images/pre-wedding/32.webp",
-  "/images/wedding/23.webp",
-  "/images/pre-wedding/22.webp",
-  "/images/wedding/15.webp",
-  "/images/pre-wedding/20.webp",
-  "/images/wedding/19.webp",
+  "/wedding/10.webp",
+  "/pre-wedding/32.webp",
+  "/wedding/23.webp",
+  "/pre-wedding/22.webp",
+  "/wedding/15.webp",
+  "/pre-wedding/20.webp",
+  "/wedding/06.webp",
   null,
-  "/images/pre-wedding/23.webp",
-  "/images/wedding/17.webp",
-  "/images/pre-wedding/10.webp",
-  "/images/wedding/13.webp",
-  "/images/pre-wedding/19.webp",
-  "/images/wedding/11.webp",
-  "/images/pre-wedding/14.webp",
+  "/pre-wedding/23.webp",
+  "/wedding/17.webp",
+  "/pre-wedding/10.webp",
+  "/wedding/13.webp",
+  "/pre-wedding/19.webp",
+  "/wedding/11.webp",
+  "/pre-wedding/14.webp",
 ];
 
 export default function IconicMoments() {
@@ -77,7 +77,7 @@ export default function IconicMoments() {
                 className="im-tile relative overflow-hidden aspect-[3/4] sm:aspect-square lg:aspect-[3/4] cursor-pointer group"
               >
                 <img
-                  src={src}
+                  src={`${import.meta.env.VITE_S3_BASE_URL}${src}`}
                   alt="Wedding moment"
                   loading="eager"
                   decoding="sync"
