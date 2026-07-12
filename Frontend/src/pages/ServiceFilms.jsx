@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SERVICE_FILMS  from "../data/serviceFilms.json";
 
 // ─────────────────────────────────────────────
 // FILMS CONFIG
@@ -18,80 +19,7 @@ import Footer from "../components/Footer";
 //   event  — event type · location label
 //   quote  — short pull-quote shown above the slider
 // ─────────────────────────────────────────────
-const FILMS = {
-  "wedding": {
-    title: "Wedding",
-    sub: "Films",
-    tag: "Timeless Moments",
-    desc: "Every emotion, every glance, every vow — preserved exactly as it felt on the day.",
-    items: [
-      {
-        id: 1,
-        name: "Ananya & Rohan",
-        event: "Wedding · Udaipur",
-        quote: "Shiveye didn't just film our wedding — they understood it. Every frame feels like it remembers something we'd forgotten we felt.",
-        src: "/films/wedding/ananya-rohan.mp4",
-        poster: "/films/wedding/ananya-rohan-poster.jpg",
-      },
-      {
-        id: 2,
-        name: "Priya & Aditya",
-        event: "Wedding · Goa",
-        quote: "We've watched our film more times than we'll admit. It doesn't feel like a video of our day — it feels like our day, again.",
-        src: "/films/wedding/priya-aditya.mp4",
-        poster: "/films/wedding/priya-aditya-poster.jpg",
-      },
-      {
-        id: 3,
-        name: "Meera & Karan",
-        event: "Wedding · Jaipur",
-        quote: "From the first call to the final reel, it never felt like a shoot. It felt like someone we trusted was simply there, quietly paying attention.",
-        src: "/films/wedding/meera-karan.mp4",
-        poster: "/films/wedding/meera-karan-poster.jpg",
-      },
-      {
-        id: 4,
-        name: "Sara & Vikram",
-        event: "Wedding · Mumbai",
-        quote: "Months later, friends still ask who shot our wedding. That's the real review — people stopping mid-scroll, every single time.",
-        src: "/films/wedding/sara-vikram.mp4",
-        poster: "/films/wedding/sara-vikram-poster.jpg",
-      },
-    ],
-  },
-  "pre-wedding": {
-    title: "Pre-Wedding",
-    sub: "Films",
-    tag: "Your Story Begins",
-    desc: "Intimate, cinematic frames that belong to just the two of you — before the big day.",
-    items: [
-      {
-        id: 1,
-        name: "Isha & Nikhil",
-        event: "Pre-Wedding · Lonavala",
-        quote: "We were nervous in front of the camera but the team made it feel so natural. The film still gives us goosebumps.",
-        src: "/films/pre-wedding/isha-nikhil.mp4",
-        poster: "/films/pre-wedding/isha-nikhil-poster.jpg",
-      },
-      {
-        id: 2,
-        name: "Pooja & Arjun",
-        event: "Pre-Wedding · Pune",
-        quote: "They captured us exactly as we are — laughing, real, and completely in love. We couldn't have asked for more.",
-        src: "/films/pre-wedding/pooja-arjun.mp4",
-        poster: "/films/pre-wedding/pooja-arjun-poster.jpg",
-      },
-      {
-        id: 3,
-        name: "Riya & Dev",
-        event: "Pre-Wedding · Mumbai",
-        quote: "Every frame is a memory we'll carry forever. The whole experience was as beautiful as the film itself.",
-        src: "/films/pre-wedding/riya-dev.mp4",
-        poster: "/films/pre-wedding/riya-dev-poster.jpg",
-      },
-    ],
-  },
-};
+const FILMS = SERVICE_FILMS;
 
 // ─────────────────────────────────────────────
 // VIDEO CARD
@@ -130,7 +58,7 @@ function ServiceFilmsCard({ data, isActive }) {
       <video
         ref={videoRef}
         src={data.src}
-        poster={data.poster}
+        poster={import.meta.env.VITE_S3_BASE_URL+data.poster}
         className="absolute inset-0 w-full h-full object-cover"
         playsInline
         onPause={handlePause}

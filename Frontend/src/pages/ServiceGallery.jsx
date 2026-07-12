@@ -8,7 +8,6 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useParams } from "react-router-dom";
 import SERVICE_GALLERY  from "../data/serviceGallery.json";
-console.log(SERVICE_GALLERY);
 
 // ─────────────────────────────────────────────
 // PHOTO CONFIG
@@ -211,7 +210,7 @@ export default function ServiceGallery() {
       // 1. Force the images to stay loaded up-front and prevent unmounting glitches
       image: ({ src, alt, sizes, className, style }) => (
         <img
-          src={src}
+          src={import.meta.env.VITE_S3_BASE_URL+src}
           alt={alt}
           sizes={sizes}
           className={className}
